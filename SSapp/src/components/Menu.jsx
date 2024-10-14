@@ -3,12 +3,6 @@ import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import MuiAppBar from '@mui/material/AppBar';
 
-const drawerWidth = 245;
-const drawerWidthClosed = 50;
-const drawerWidthOpenGap = 60;
-const drawerWidthOpenGapRight = 30;
-const drawerMarginTop = 20;
-
 const AppBar = styled(MuiAppBar, {
 	shouldForwardProp: (prop) => prop !== 'open',
     })(({ theme, open }) => ({
@@ -24,8 +18,6 @@ const CustomAppBar = styled(AppBar, {
 	shouldForwardProp: (prop) => prop !== 'open',
     })(({ theme }) => ({
         backgroundColor: '#F2E8DA',
-        // Ensure the AppBar is centered both horizontally and vertically
-        position: 'fixed',
         left: '50%',
         top: '5%',
         transform: 'translate(-50%, -50%)', // Center using transform
@@ -40,10 +32,9 @@ const CustomAppBar = styled(AppBar, {
 export default function LogoMenu() {
 	return (
 		<Fragment>
-			<CustomAppBar elevation={0} position="fixed">
+			<CustomAppBar elevation={0} >
 				<Typography
 					variant="h3"
-					noWrap
 					component="a"
 					href="#app-bar-with-responsive-menu"
 					sx={{

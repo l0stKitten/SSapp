@@ -2,13 +2,13 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import PersistentDrawerLeft from './page/Main'
+import MainPage from './page/Main'
 
 function App() {
     const [count, setCount] = useState(0)
 
     return (
-        <PersistentDrawerLeft/>
+        <MainPage/>
     )
 }
 

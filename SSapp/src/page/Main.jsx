@@ -1,14 +1,14 @@
 import * as React from 'react';
-import { styled, useTheme } from '@mui/material/styles';
+import { useState } from 'react';
+import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import LogoMenu from '../components/Menu';
-import Post from '../components/Posts';
+import Post from '../components/VistaResultados';
 import { Grid2 } from '@mui/material';
 
-import CreatePost from '../components/CreatePosts';
+import CreatePost from '../components/VistaForm';
 
-const drawerWidth = 240;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme }) => ({
@@ -43,28 +43,37 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
-export default function PersistentDrawerLeft() {
+export default function MainPage() {
+  const [posts, setPosts] = useState([]); // State for posts
+
+  const handleAddPost = (content) => {
+    const newPost = { content, date: new Date().toLocaleDateString() };
+    setPosts((prevPosts) => [newPost, ...prevPosts]);
+  };
 
   return (
     <Box sx={{ display: 'flex' }}>
-        <CssBaseline />
-        <LogoMenu/>
-        <Main>
-            <DrawerHeader />
-            <Grid2 container spacing={2} marginRight={2}>
-                <Grid2 container item xs={10} 
-                    direction="column"
-                    justifyContent="flex-start"
-                    alignItems="center"
-                >
-                    <CreatePost></CreatePost>
-                    {Array.from(Array(6)).map((_, index) => (
-                    <Post key={index}>xs=8</Post>
-                    ))}
-                </Grid2>
-                
-            </Grid2>
-        </Main>
+      <CssBaseline />
+      <LogoMenu />
+      <Main>
+        <DrawerHeader />
+        <Grid2 container spacing={2} marginRight={2}>
+          <Grid2
+            container
+            item
+            xs={10}
+            direction="column"
+            justifyContent="flex-start"
+            alignItems="center"
+          >
+            <CreatePost onPost={handleAddPost} />
+
+            {posts.map((post, index) => (
+              <Post key={index} content={post.content} date={post.date} />
+            ))}
+          </Grid2>
+        </Grid2>
+      </Main>
     </Box>
   );
 }
