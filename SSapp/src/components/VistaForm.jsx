@@ -1,21 +1,17 @@
 import React, { useState, useRef } from 'react';
-import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
 import Avatar from '@mui/material/Avatar';
 import CardHeader from '@mui/material/CardHeader';
 import SendOutlinedIcon from '@mui/icons-material/SendOutlined';
 import Card from '@mui/material/Card';
-import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import ButtonGroup from '@mui/material/ButtonGroup';
-import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import { Tooltip } from '@mui/material';
-import { red } from '@mui/material/colors';
 
-const CreatePost = ({ onPost }) => {
+const VistaForm = ({ onPost }) => {
     const [postContent, setPostContent] = useState('');
 
     const handleCancelClick = () => {
@@ -71,4 +67,4 @@ const CreatePost = ({ onPost }) => {
     );
 };
 
-export default CreatePost;
+export default VistaForm;

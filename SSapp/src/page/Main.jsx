@@ -4,10 +4,10 @@ import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import LogoMenu from '../components/Menu';
-import Post from '../components/VistaResultados';
+import VistaResultados from '../components/VistaResultados';
 import { Grid2 } from '@mui/material';
 
-import CreatePost from '../components/VistaForm';
+import VistaForm from '../components/VistaForm';
 
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
@@ -57,19 +57,19 @@ export default function MainPage() {
       <LogoMenu />
       <Main>
         <DrawerHeader />
-        <Grid2 container spacing={2} marginRight={2}>
+        <Grid2 >
           <Grid2
             container
-            item
+            spacing={2}
             xs={10}
             direction="column"
             justifyContent="flex-start"
             alignItems="center"
           >
-            <CreatePost onPost={handleAddPost} />
+            <VistaForm onPost={handleAddPost} />
 
             {posts.map((post, index) => (
-              <Post key={index} content={post.content} date={post.date} />
+              <VistaResultados key={index} content={post.content} date={post.date} />
             ))}
           </Grid2>
         </Grid2>

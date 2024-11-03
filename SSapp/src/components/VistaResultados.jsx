@@ -38,7 +38,7 @@ const ExpandMore = styled((props) => {
     ],
   }));
 
-export default function Post({ content, date }) {
+export default function VistaResultados({ content, date }) {
     const [expanded, setExpanded] = React.useState(false);
 
     const handleExpandClick = () => {
@@ -75,9 +75,9 @@ export default function Post({ content, date }) {
                     height="310"
                     image={img}
                 />
-                <CardContent>
-                    <Typography sx={{ marginBottom: 2 }}>Method:</Typography>
-                    <Typography sx={{ marginBottom: 2 }}>
+                <CardContent sx={{ marginBottom: 2 }}>
+                    <Typography>Method:</Typography>
+                    <Typography>
                         Recomendaciones
                     </Typography>
                 </CardContent>
