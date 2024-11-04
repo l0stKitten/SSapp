@@ -6,6 +6,8 @@ import CssBaseline from '@mui/material/CssBaseline';
 import LogoMenu from '../components/Menu';
 import VistaResultados from '../components/VistaResultados';
 import { Grid2 } from '@mui/material';
+import { toast } from 'react-toastify';
+import axios from 'axios';
 
 import VistaForm from '../components/VistaForm';
 
@@ -46,9 +48,23 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 export default function MainPage() {
   const [posts, setPosts] = useState([]); // State for posts
 
-  const handleAddPost = (content) => {
-    const newPost = { content, date: new Date().toLocaleDateString() };
-    setPosts((prevPosts) => [newPost, ...prevPosts]);
+  const handleAddPost = async (content) => {
+
+    try {
+      const response = await axios.post('http://localhost:5050/predict', {
+        text: content
+      });
+
+      if (response.status === 200) {
+        toast.success('El contenido se evaluo correctamente');
+        const newPost = { text: content, date: new Date().toLocaleDateString(), predictions: response.data.predicted_class[0] };
+        console.log(newPost)
+        setPosts((prevPosts) => [newPost, ...prevPosts]);
+      }
+    } catch (err) {
+      toast.error('Hubo un error');
+      console.error(err);
+    }
   };
 
   return (
@@ -69,7 +85,7 @@ export default function MainPage() {
             <VistaForm onPost={handleAddPost} />
 
             {posts.map((post, index) => (
-              <VistaResultados key={index} content={post.content} date={post.date} />
+              <VistaResultados key={index} content={post.text} date={post.date} predictions={post.predictions} />
             ))}
           </Grid2>
         </Grid2>

@@ -12,7 +12,7 @@ import { Collapse } from '@mui/material';
 import { red } from '@mui/material/colors';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-import img from '../img/piechart.jpg'
+import { BarChart } from '@mui/x-charts/BarChart';
 
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -38,7 +38,7 @@ const ExpandMore = styled((props) => {
     ],
   }));
 
-export default function VistaResultados({ content, date }) {
+export default function VistaResultados({ content, date, predictions }) {
     const [expanded, setExpanded] = React.useState(false);
 
     const handleExpandClick = () => {
@@ -70,15 +70,25 @@ export default function VistaResultados({ content, date }) {
             </CardActions>
 
             <Collapse in={expanded} timeout="auto" unmountOnExit>
-                <CardMedia
-                    component="img"
-                    height="310"
-                    image={img}
+                <BarChart
+                  xAxis={[
+                    {
+                      id: 'barCategories',
+                      data: ['Low Risk', 'Medium Risk', 'High Risk', 'No Enough Information'],
+                      scaleType: 'band',
+                    },
+                  ]}
+                  series={[
+                    {
+                      data: predictions,
+                    },
+                  ]}
+                  width={500}
+                  height={300}
                 />
                 <CardContent sx={{ marginBottom: 2 }}>
-                    <Typography>Method:</Typography>
                     <Typography>
-                        Recomendaciones
+                        Recomendaciones:
                     </Typography>
                 </CardContent>
             </Collapse>
